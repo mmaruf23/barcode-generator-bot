@@ -1,0 +1,12 @@
+{
+  "name": "barcode-generator-bot",
+  "type": "module",
+  "dependencies": {
+    "hono": "^4.8.9",
+    "telegraf": "^4.16.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.17",
+    "typescript": "^5.8.3"
+  }
+}
