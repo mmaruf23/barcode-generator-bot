@@ -1,14 +1,25 @@
-import { Hono } from 'hono'
+import { Hono } from 'hono';
+import { bot } from './bot.js';
+import { setWebhook } from './services/webhook.js';
 
-const app = new Hono()
+const app = new Hono();
 
-const welcomeStrings = [
-  "Hello Hono!",
-  "To learn more about Hono on Vercel, visit https://vercel.com/docs/frameworks/backend/hono",
-]
+if (process.env.NODE_ENV == 'development') {
+  console.log('Running in development mode (polling)');
+  bot.launch();
+} else {
+  app.get('/', (c) => {
+    return c.text('bot is runnin');
+  });
 
-app.get('/', (c) => {
-  return c.text(welcomeStrings.join('\n\n'))
-})
+  app.post('/webhook', async (c) => {
+    const req = await c.req.json();
+    await bot.handleUpdate(req);
+    return c.status(200);
+  });
 
-export default app
+  // set webhook
+  setWebhook();
+}
+
+export default app;

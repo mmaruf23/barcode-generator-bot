@@ -1,12 +1,19 @@
 {
   "name": "barcode-generator-bot",
   "type": "module",
+  "scripts": {
+    "dev": "tsx --watch src"
+  },
   "dependencies": {
+    "canvas": "^3.2.0",
+    "dotenv": "^17.2.3",
     "hono": "^4.8.9",
+    "jsbarcode": "^3.12.1",
     "telegraf": "^4.16.3"
   },
   "devDependencies": {
     "@types/node": "^20.11.17",
+    "tsx": "^4.20.6",
     "typescript": "^5.8.3"
   }
 }
