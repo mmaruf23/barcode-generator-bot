@@ -9,6 +9,7 @@ if (process.env.NODE_ENV == 'development') {
   bot.launch();
 } else {
   app.get('/', (c) => {
+    setWebhook();
     return c.text('bot is runnin');
   });
 
@@ -19,7 +20,6 @@ if (process.env.NODE_ENV == 'development') {
   });
 
   // set webhook
-  setWebhook();
 }
 
 export default app;
