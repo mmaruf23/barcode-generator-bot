@@ -9,7 +9,7 @@ export async function generateBarcodes(text: string) {
 
   const barcodes = texts.map((t) => {
     const canvas = createCanvas(400, 150);
-    JsBarcode(canvas, t, { format: 'CODE128' });
+    JsBarcode(canvas, t, { format: 'CODE128', text: t });
     const buffer = canvas.toBuffer('image/png');
     return buffer;
   });
