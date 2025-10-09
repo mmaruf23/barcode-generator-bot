@@ -1,23 +1,15 @@
 import { createCanvas, registerFont } from 'canvas';
 import JsBarcode from 'jsbarcode';
-import path from 'node:path';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-const fontpath = path.join(
-  process.cwd(),
-  'assets',
-  'fonts',
-  'RobotoMono-Regular.ttf'
-);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-const customFontFamilyName = 'MyRoboto';
+registerFont(path.join(__dirname, '.../assets/fonts/RobotoMono-Regular.ttf'), {
+  family: 'RobotoMono',
+});
 
-try {
-  registerFont(fontpath, {
-    family: customFontFamilyName,
-  });
-} catch (error) {
-  console.warn('failed register font ', error);
-}
 export async function generateBarcodes(text: string) {
   const texts = text.split(/[,\s]+/).slice(0, 10);
 
@@ -29,7 +21,7 @@ export async function generateBarcodes(text: string) {
     JsBarcode(canvas, t, {
       format: 'CODE128',
       text: t,
-      font: customFontFamilyName,
+      font: 'RobotoMono',
     });
     const buffer = canvas.toBuffer('image/png');
     return buffer;
