@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-registerFont(path.join(__dirname, '.../assets/fonts/RobotoMono-Regular.ttf'), {
+registerFont(path.join(__dirname, '../assets/fonts/RobotoMono-Regular.ttf'), {
   family: 'RobotoMono',
 });
 
