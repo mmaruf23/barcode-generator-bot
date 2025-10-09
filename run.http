@@ -1,0 +1,5 @@
+### SET WEBHOOK
+GET https://api.telegram.org/bot8464795520:AAGgdxhpk88FYDNdWABy3EzHcM_g1ZtJ2R4/setWebhook?url=https://08e7bcd6b370.ngrok-free.app/webhook&secret_token=ini_rahasia
+
+### UNSET WEBHOOK
+GET https://api.telegram.org/bot8464795520:AAGgdxhpk88FYDNdWABy3EzHcM_g1ZtJ2R4/deleteWebhook

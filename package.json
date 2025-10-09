@@ -2,7 +2,7 @@
   "name": "barcode-generator-bot",
   "type": "module",
   "scripts": {
-    "dev": "tsx --watch src"
+    "dev": "NODE_ENV=development tsx --watch src"
   },
   "dependencies": {
     "canvas": "^3.2.0",
