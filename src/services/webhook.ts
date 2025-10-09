@@ -1,17 +1,12 @@
 import 'dotenv/config';
+import { config } from '../config.js';
 
-const webhook_url = process.env.WEBHOOK_URL;
-const token = process.env.BOT_TOKEN;
-const secret = process.env.SECRET_TOKEN;
-
-if (!webhook_url || !token || !secret) {
-  throw new Error('env not set properly');
-}
+const { BOT_TOKEN, SECRET_TOKEN, WEBHOOK_URL } = config();
 
 export const setWebhook = async () => {
   try {
     const result = await fetch(
-      `https://api.telegram.org/bot${token}/setWebhook?url=${webhook_url}&secret_token=${secret}`
+      `https://api.telegram.org/bot${BOT_TOKEN}/setWebhook?url=${WEBHOOK_URL}/webhook&secret_token=${SECRET_TOKEN}`
     );
     if (!result.ok) {
       console.error('fail set webhook : ', result.body);
@@ -23,4 +18,18 @@ export const setWebhook = async () => {
 
   console.log('webhok was set');
   return;
+};
+
+export const deleteWebhook = async () => {
+  try {
+    const result = await fetch(
+      `https://api.telegram.org/bot${BOT_TOKEN}/deleteWebhook`
+    );
+    if (!result.ok) {
+      console.error('fail delete webhook : ', result.body);
+      return;
+    }
+  } catch (error) {
+    console.error('fail delete webhook :', error);
+  }
 };

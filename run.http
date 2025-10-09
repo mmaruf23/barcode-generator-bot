@@ -1,5 +1,15 @@
 ### SET WEBHOOK
-GET https://api.telegram.org/bot8464795520:AAGgdxhpk88FYDNdWABy3EzHcM_g1ZtJ2R4/setWebhook?url=https://08e7bcd6b370.ngrok-free.app/webhook&secret_token=ini_rahasia
+# GET https://api.telegram.org/bot8464795520:AAGgdxhpk88FYDNdWABy3EzHcM_g1ZtJ2R4/setWebhook?url=https://08e7bcd6b370.ngrok-free.app/webhook&secret_token=ini_rahasia
+GET https://barcode-generator-bot.vercel.app/set
 
 ### UNSET WEBHOOK
 GET https://api.telegram.org/bot8464795520:AAGgdxhpk88FYDNdWABy3EzHcM_g1ZtJ2R4/deleteWebhook
+
+### INFO WEBHOOK
+GET https://api.telegram.org/bot8464795520:AAGgdxhpk88FYDNdWABy3EzHcM_g1ZtJ2R4/getWebhookInfo
+
+### SET LOCAL WEBHOOK
+GET http://localhost:3000/set
+
+### UNSET LOCAL WEBHOOK
+GET http://localhost:3000/set
