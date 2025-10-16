@@ -1,31 +1,40 @@
-import { createCanvas, registerFont } from 'canvas';
+import { Resvg } from '@resvg/resvg-js';
 import JsBarcode from 'jsbarcode';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import { JSDOM } from 'jsdom';
+const dom = new JSDOM();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-registerFont(path.join(__dirname, '../assets/fonts/RobotoMono-Regular.ttf'), {
-  family: 'RobotoMono',
-});
-
+const document = dom.window.document;
+const XMLSerializer = dom.window.XMLSerializer;
 export async function generateBarcodes(text: string) {
+  const serializer = new XMLSerializer();
+
   const texts = text.split(/[,\s]+/).slice(0, 10);
 
   if (!texts.length) return [];
   console.log(texts);
 
-  const barcodes = texts.map((t) => {
-    const canvas = createCanvas(400, 150);
-    JsBarcode(canvas, t, {
-      format: 'CODE128',
-      text: t,
-      font: 'RobotoMono',
+  const stringOfBarcodes = texts.map((t) => {
+    const svgNode = document.createElementNS(
+      'http://www.w3.org/2000/svg',
+      'svg'
+    );
+    JsBarcode(svgNode, t, {
+      xmlDocument: document,
     });
-    const buffer = canvas.toBuffer('image/png');
-    return buffer;
+
+    return serializer.serializeToString(svgNode);
   });
 
-  return barcodes;
+  const pngBuffers = await Promise.all(
+    stringOfBarcodes.map(async (s) => {
+      const resvg = new Resvg(s, {
+        fitTo: { mode: 'width', value: 900 },
+      });
+
+      const pngData = resvg.render();
+      return pngData.asPng();
+    })
+  );
+
+  return pngBuffers;
 }
